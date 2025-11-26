@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.laquintapata.app.dto.request.UserRequest;
 import com.laquintapata.app.dto.response.UserResponse;
-import com.laquintapata.app.service.UserService;
+import com.laquintapata.app.service.interfaces.UserService;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
