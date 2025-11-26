@@ -1,4 +1,4 @@
-package com.laquintapata.app.service.interface;
+package com.laquintapata.app.service.interfaces;
  
 import java.util.List;
 import java.util.UUID;
