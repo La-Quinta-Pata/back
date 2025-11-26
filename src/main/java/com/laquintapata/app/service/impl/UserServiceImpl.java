@@ -32,11 +32,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
 @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        User user = userRepository.findByEmail(email) 
-            .orElseThrow(() -> 
+        User user = userRepository.findByEmail(email)
+            .orElseThrow(() ->
                 new UsernameNotFoundException("Usuario no encontrado con email: " + email)
             );
-        return new UserDetail(user); 
+        return new UserDetail(user);
     }
 
 
@@ -52,28 +52,28 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         User user = userMapper.userRequestToUser(userRequest, hashedPassword, "ADMIN");
     
         User savedUser = userRepository.save(user);
-        return userMapper.userToUserResponse(savedUser); 
+        return userMapper.userToUserResponse(savedUser);
     }
 
 @Override
     public UserResponse getUserById(UUID id) {
-        User user = userRepository.findById(id).orElseThrow(() -> 
+        User user = userRepository.findById(id).orElseThrow(() ->
             new ResourceNotFoundException("Usuario", "ID", id) 
         );
-        return userMapper.userToUserResponse(user); 
+        return userMapper.userToUserResponse(user);
     }
     
     @Override
     public UserResponse getUserByName(String name) {
-        User user = userRepository.findByName(name).orElseThrow(() -> 
-            new ResourceNotFoundException("Usuario", "nombre", name) 
+        User user = userRepository.findByName(name).orElseThrow(() ->
+            new ResourceNotFoundException("Usuario", "nombre", name)
         );
-        return userMapper.userToUserResponse(user); 
+        return userMapper.userToUserResponse(user);
     }
     @Override
     public List<UserResponse> getUsers() {
         return userRepository.findAll().stream()
             .map(userMapper::userToUserResponse)
-            .collect(Collectors.toList()); 
+            .collect(Collectors.toList());
     }
 }
