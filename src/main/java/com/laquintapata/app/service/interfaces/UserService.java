@@ -5,8 +5,8 @@ import java.util.UUID;
 
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.laquintapata.dto.request.UserRequest;
-import com.laquintapata.backend.dto.response.UserResponse;
+import com.laquintapata.app.dto.request.UserRequest;
+import com.laquintapata.app.dto.response.UserResponse;
 
 public interface UserService {
 
