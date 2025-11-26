@@ -8,9 +8,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
 public class UserRequest {
     @NotBlank(message = "Nombre no puede estar vacío")
     private String name;
