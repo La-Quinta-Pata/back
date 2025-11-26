@@ -5,7 +5,7 @@ import lombok.*;
 import java.util.UUID;
 
 @Entity
-@Table(name = "Users")
+@Table(name = "users")  
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -21,7 +21,6 @@ public class User {
 
     @Column(length = 50)  
     private String name;
-
 
     @Column(nullable = false, length = 30) 
     private String role;
