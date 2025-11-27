@@ -7,10 +7,10 @@ import lombok.Data;
 public class VideoRequestDTO {
 
     @NotBlank(message = "El título no puede estar vacío.")
-    private String titulo;
+    private String title;
 
     @NotBlank(message = "La descripción no puede estar vacía.")
-    private String descripcion;
+    private String description;
 
     @NotBlank(message = "La URL del video es obligatoria.")
     private String url;
