@@ -34,6 +34,4 @@ public class Video {
 
     @Column(nullable = false)
     private String thumbnail;   
-
-
 }
