@@ -10,11 +10,12 @@ import com.laquintapata.app.dto.request.AxisRequestDTO;
 import com.laquintapata.app.dto.response.AxisResponseDTO;
 import com.laquintapata.app.entity.Axis;
 
-@Mapper (componentModel = "spring")
+@Mapper(componentModel = "spring")
 public interface AxisMapper {
-    
+
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "videos", ignore = true) 
+    @Mapping(target = "videos", ignore = true)
+
     Axis toEntity(AxisRequestDTO dto);
 
     AxisResponseDTO toResponseDTO(Axis axis);
@@ -23,5 +24,5 @@ public interface AxisMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "videos", ignore = true)
     void updateAxisFromDto(AxisRequestDTO dto, @MappingTarget Axis axis);
-    
+
 }
