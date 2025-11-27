@@ -33,5 +33,5 @@ public class Video {
     private String url;
 
     @Column(nullable = false)
-    private String thumbnail;   
+    private String thumbnailUrl;   
 }
