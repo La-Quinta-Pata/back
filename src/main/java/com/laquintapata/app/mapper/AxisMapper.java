@@ -14,12 +14,14 @@ import com.laquintapata.app.entity.Axis;
 public interface AxisMapper {
     
     @Mapping(target = "id", ignore = true)
+    @Mapping(target = "videos", ignore = true) 
     Axis toEntity(AxisRequestDTO dto);
 
     AxisResponseDTO toResponseDTO(Axis axis);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     @Mapping(target = "id", ignore = true)
+    @Mapping(target = "videos", ignore = true)
     void updateAxisFromDto(AxisRequestDTO dto, @MappingTarget Axis axis);
     
 }
