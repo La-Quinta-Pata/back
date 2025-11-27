@@ -4,10 +4,10 @@ import lombok.Data;
 
 @Data
 public class VideoResponseDTO {
-    
-    private String titulo;
 
-    private String descripcion;
+    private String title;
+
+    private String description;
 
     private String url;
 
