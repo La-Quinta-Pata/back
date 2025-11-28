@@ -1,6 +1,6 @@
   package com.laquintapata.app.controller;
 
-  import com.laquintapata.app.dto.request.UserRequest;
+  import com.laquintapata.app.dto.request.AuthRequest;
   import com.laquintapata.app.dto.response.AuthResponseDTO;
   import com.laquintapata.app.service.interfaces.AuthService;
   import jakarta.validation.Valid;
@@ -18,7 +18,7 @@
       private final AuthService authService;
 
       @PostMapping("/login")
-      public ResponseEntity<AuthResponseDTO> login(@Valid @RequestBody UserRequest request) {
+      public ResponseEntity<AuthResponseDTO> login(@Valid @RequestBody AuthRequest request) {
           log.info("Authenticating user with email: {}", request.getEmail());
           AuthResponseDTO response = authService.login(request);
           return ResponseEntity.ok(response);
