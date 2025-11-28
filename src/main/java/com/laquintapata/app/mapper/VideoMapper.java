@@ -14,11 +14,13 @@ import com.laquintapata.app.entity.Video;
 public interface VideoMapper {
 
     @Mapping(target = "id", ignore = true)
+    @Mapping(target = "axis", ignore = true)
     Video toEntity (VideoRequestDTO dto);
 
     VideoResponseDTO toResponseDTO (Video video);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     @Mapping(target = "id", ignore = true)
+    @Mapping(target = "axis", ignore = true)
     void updateEntityFromRequest(VideoRequestDTO dto, @MappingTarget Video video);    
 }
