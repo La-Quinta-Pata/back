@@ -1,6 +1,5 @@
 package com.laquintapata.app.mapper;
 
-
 import com.laquintapata.app.dto.request.UserRequest;
 import com.laquintapata.app.dto.response.UserResponse;
 import com.laquintapata.app.entity.User;
@@ -17,15 +16,9 @@ public interface UserMapper {
     UserResponse userToUserResponse(User user);
 
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "role", ignore = true)
-    @Mapping(target = "password", ignore = true)
-    User userRequestToUser(UserRequest userRequest);
-
-    @Mapping(target = "id", ignore = true)
     @Mapping(target = "password", source = "hashedPassword")
     @Mapping(target = "role", source = "role")
     @Mapping(target = "email", source = "request.email")
     @Mapping(target = "name", source = "request.name")
     User userRequestToUser(UserRequest request, String hashedPassword, String role);
-
 }
