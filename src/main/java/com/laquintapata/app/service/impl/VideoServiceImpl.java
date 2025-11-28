@@ -3,7 +3,6 @@ package com.laquintapata.app.service.impl;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 
 import com.laquintapata.app.dto.request.VideoRequestDTO;
