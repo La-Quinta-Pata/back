@@ -18,4 +18,7 @@ public class VideoRequestDTO {
     @NotBlank(message = "La URL de la thumbnail es obligatoria.")
     private String thumbnailUrl;   
     
+    @NotBlank(message = "El video necesita un eje.")
+    private Long axisId;
+    
 }

@@ -11,5 +11,9 @@ public class VideoResponseDTO {
 
     private String url;
 
-    private String thumbnailUrl;   
+    private String thumbnailUrl;  
+    
+    private Long axisId;   
+    
+    private String axisType; 
 }

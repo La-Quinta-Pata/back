@@ -15,12 +15,14 @@ public interface VideoMapper {
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "axis", ignore = true)
-    Video toEntity (VideoRequestDTO dto);
+    Video toEntity(VideoRequestDTO dto);
 
-    VideoResponseDTO toResponseDTO (Video video);
+    @Mapping(source = "axis.id", target = "axisId")
+    @Mapping(source = "axis.type", target = "axisType")
+    VideoResponseDTO toResponseDTO(Video video);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "axis", ignore = true)
-    void updateEntityFromRequest(VideoRequestDTO dto, @MappingTarget Video video);    
+    void updateEntityFromRequest(VideoRequestDTO dto, @MappingTarget Video video);
 }
