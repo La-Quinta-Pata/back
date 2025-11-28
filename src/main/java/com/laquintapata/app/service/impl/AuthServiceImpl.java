@@ -1,6 +1,6 @@
 package com.laquintapata.app.service.impl;
 
-  import com.laquintapata.app.dto.request.UserRequest;
+  import com.laquintapata.app.dto.request.AuthRequest;
   import com.laquintapata.app.dto.response.AuthResponseDTO;
   import com.laquintapata.app.dto.response.UserResponse;
   import com.laquintapata.app.entity.User;
@@ -30,7 +30,7 @@ package com.laquintapata.app.service.impl;
       private final UserMapper userMapper;
 
       @Override
-      public AuthResponseDTO login(UserRequest request) {
+      public AuthResponseDTO login(AuthRequest request) {
           log.info("Authenticating user with email: {}", request.getEmail());
 
           Authentication authentication = authenticationManager.authenticate(
