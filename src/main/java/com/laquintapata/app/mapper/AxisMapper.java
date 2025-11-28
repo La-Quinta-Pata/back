@@ -14,7 +14,6 @@ import com.laquintapata.app.entity.Axis;
 public interface AxisMapper {
 
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "videos", ignore = true)
 
     Axis toEntity(AxisRequestDTO dto);
 
@@ -22,7 +21,6 @@ public interface AxisMapper {
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "videos", ignore = true)
     void updateAxisFromDto(AxisRequestDTO dto, @MappingTarget Axis axis);
 
 }

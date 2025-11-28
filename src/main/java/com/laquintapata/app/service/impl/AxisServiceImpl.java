@@ -26,16 +26,6 @@ public class AxisServiceImpl implements AxisService {
     }
 
     @Override
-    public AxisResponseDTO update(Long id, AxisRequestDTO dto) {
-        Axis existing = axisRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Axis no encontrado: " + id));
-
-        axisMapper.updateAxisFromDto(dto, existing);
-        Axis updated = axisRepository.save(existing);
-        return axisMapper.toResponseDTO(updated);
-    }
-
-    @Override
     public void delete(Long id) {
         if (!axisRepository.existsById(id)) {
             throw new RuntimeException("Axis no encontrado: " + id);

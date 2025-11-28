@@ -8,8 +8,6 @@ import com.laquintapata.app.dto.response.AxisResponseDTO;
 public interface AxisService {
     AxisResponseDTO create(AxisRequestDTO dto);
 
-    AxisResponseDTO update(Long id, AxisRequestDTO dto);
-
     void delete(Long id);
 
     AxisResponseDTO getById(Long id);

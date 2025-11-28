@@ -33,7 +33,7 @@ build/
 .vscode/
 
 .env
-application.properties
+!**/src/main/resources/application.properties
 
 .DS_Store
 .DS_Store?
