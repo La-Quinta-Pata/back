@@ -1,0 +1,15 @@
+spring.application.name=app
+
+app.jwt.secret=your_super_secret_key_that_should_be_at_least_32_characters_long_for_security
+app.jwt.expirationMs=86400000
+
+spring.datasource.url=jdbc:postgresql://localhost:5432/laquintapata
+spring.datasource.driver-class-name=org.postgresql.Driver
+spring.datasource.username=postgres
+spring.datasource.password=YOUR_PASSWORD_HERE
+
+spring.jpa.database-platform=org.hibernate.dialect.PostgreSQLDialect
+spring.jpa.hibernate.ddl-auto=validate
+
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.format_sql=true

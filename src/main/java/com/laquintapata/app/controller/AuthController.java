@@ -1,0 +1,32 @@
+  package com.laquintapata.app.controller;
+
+  import com.laquintapata.app.dto.request.UserRequest;
+  import com.laquintapata.app.dto.response.AuthResponseDTO;
+  import com.laquintapata.app.service.interfaces.AuthService;
+  import jakarta.validation.Valid;
+  import lombok.RequiredArgsConstructor;
+  import lombok.extern.slf4j.Slf4j;
+  import org.springframework.http.ResponseEntity;
+  import org.springframework.web.bind.annotation.*;
+
+  @RestController
+  @RequestMapping("/api/auth")
+  @RequiredArgsConstructor
+  @Slf4j
+  public class AuthController {
+
+      private final AuthService authService;
+
+      @PostMapping("/login")
+      public ResponseEntity<AuthResponseDTO> login(@Valid @RequestBody UserRequest request) {
+          log.info("Authenticating user with email: {}", request.getEmail());
+          AuthResponseDTO response = authService.login(request);
+          return ResponseEntity.ok(response);
+      }
+
+      @PostMapping("/logout")
+      public ResponseEntity<String> logout() {
+          log.info("User logged out");
+          return ResponseEntity.ok("Logged out successfully");
+      }
+  }
