@@ -4,12 +4,6 @@
 
 La Muestra Archivo Comunitario de Memorias Migrantes (MACMM) es una plataforma web creada para catalogar y difundir registros audiovisuales que narran experiencias migrantes. Los vídeos están organizados en cinco ejes temáticos: autobiografía, objetos, discriminación por origen, discriminación de género y resistencia. Además del catálogo, la plataforma permite visualizar los desplazamientos de las personas participantes hacia Barcelona en un mapa interactivo y consultar la información general del proyecto y su equipo. Built with React (frontend), Spring Boot (backend), and PostgreSQL (database), the application follows MVC architecture and implements a RESTful API.
 
-## 🧩 Technical Competencies
-
-## ⚙️ Technologies and Tools
-
-## ✨ Features
-
 ## 🚀 Getting Started
 
 ### Installation Steps
@@ -64,8 +58,6 @@ The API will be available at: `http://localhost:8080`
 ```bash
 curl http://localhost:8080/api/concerts
 ```
-
-## 🧩 Project Structure
 
 ## 🧪 Testing
 
