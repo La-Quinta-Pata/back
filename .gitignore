@@ -32,9 +32,10 @@ build/
 ### VS Code ###
 .vscode/
 
-.env
-!**/src/main/resources/application.properties
-
+### macOS ###
 .DS_Store
 .DS_Store?
 src/.DS_Store
+
+application-postgres.properties
+application-h2.properties
