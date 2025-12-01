@@ -1,5 +1,6 @@
 package com.laquintapata.app.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,20 +12,29 @@ import com.laquintapata.app.repository.UserRepository;
 @Configuration
 public class DataInitializer {
 
+    @Value("${app.admin.email:admin@laquintapata.com}")
+    private String adminEmail;
+
+    @Value("${app.admin.password:Admin123!}")
+    private String adminPassword;
+
+    @Value("${app.admin.name:Administrador}")
+    private String adminName;
+
     @Bean
     CommandLineRunner initDatabase(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         return args -> {
-            if (userRepository.findByEmail("admin@laquintapata.com").isEmpty()) {
+            if (userRepository.findByEmail(adminEmail).isEmpty()) {
                 User admin = new User();
-                admin.setEmail("admin@laquintapata.com");
-                admin.setPassword(passwordEncoder.encode("Admin123!"));
-                admin.setName("Administrador");
+                admin.setEmail(adminEmail);
+                admin.setPassword(passwordEncoder.encode(adminPassword));
+                admin.setName(adminName);
                 admin.setRole("ADMIN");
                 
                 userRepository.save(admin);
                 System.out.println("Usuario admin creado exitosamente!");
-                System.out.println("Email: admin@laquintapata.com");
-                System.out.println("Password: Admin123!");
+                System.out.println("Email: " + adminEmail);
+                System.out.println("Password: [PROTECTED]");
             } else {
                 System.out.println("Usuario admin ya existe en la base de datos");
             }
