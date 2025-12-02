@@ -25,7 +25,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(JWTVerificationException.class)
     public ResponseEntity<ErrorResponseDTO> handleJWTVerificationException(
             JWTVerificationException ex, WebRequest request) {
-        log.error("JWT Verification Exception: {}", ex.getMessage());
+        log.error("Excepción de verificación JWT: {}", ex.getMessage());
 
         ErrorResponseDTO errorResponse = ErrorResponseDTO.builder()
                 .timestamp(LocalDateTime.now())
@@ -40,7 +40,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(UsernameNotFoundException.class)
     public ResponseEntity<ErrorResponseDTO> handleUsernameNotFoundException(
             UsernameNotFoundException ex, WebRequest request) {
-        log.error("Username Not Found Exception: {}", ex.getMessage());
+        log.error("Excepción de usuario no encontrado: {}", ex.getMessage());
 
         ErrorResponseDTO errorResponse = ErrorResponseDTO.builder()
                 .timestamp(LocalDateTime.now())
@@ -55,7 +55,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(BadCredentialsException.class)
     public ResponseEntity<ErrorResponseDTO> handleBadCredentialsException(
             BadCredentialsException ex, WebRequest request) {
-        log.error("Bad Credentials Exception: {}", ex.getMessage());
+        log.error("Excepción de credenciales inválidas: {}", ex.getMessage());
 
         ErrorResponseDTO errorResponse = ErrorResponseDTO.builder()
                 .timestamp(LocalDateTime.now())
@@ -70,7 +70,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(DuplicateResourceException.class)
     public ResponseEntity<ErrorResponseDTO> handleDuplicateResourceException(
             DuplicateResourceException ex, WebRequest request) {
-        log.error("Duplicate Resource Exception: {}", ex.getMessage());
+        log.error("Excepción de recurso duplicado: {}", ex.getMessage());
 
         ErrorResponseDTO errorResponse = ErrorResponseDTO.builder()
                 .timestamp(LocalDateTime.now())
@@ -85,7 +85,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<ErrorResponseDTO> handleResourceNotFoundException(
             ResourceNotFoundException ex, WebRequest request) {
-        log.error("Resource Not Found Exception: {}", ex.getMessage());
+        log.error("Excepción de recurso no encontrado: {}", ex.getMessage());
 
         ErrorResponseDTO errorResponse = ErrorResponseDTO.builder()
                 .timestamp(LocalDateTime.now())
@@ -100,7 +100,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorResponseDTO> handleMethodArgumentNotValidException(
             MethodArgumentNotValidException ex, WebRequest request) {
-        log.error("Method Argument Not Valid Exception");
+        log.error("Excepción de validación fallida");
 
         String details = ex.getBindingResult()
                 .getAllErrors()
@@ -128,7 +128,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(AccessDeniedException.class)
     public ResponseEntity<ErrorResponseDTO> handleAccessDeniedException(
             AccessDeniedException ex, WebRequest request) {
-        log.error("Access Denied Exception: {}", ex.getMessage());
+        log.error("Excepción de acceso denegado: {}", ex.getMessage());
 
         ErrorResponseDTO errorResponse = ErrorResponseDTO.builder()
                 .timestamp(LocalDateTime.now())
@@ -143,7 +143,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(AuthenticationException.class)
     public ResponseEntity<ErrorResponseDTO> handleAuthenticationException(
             AuthenticationException ex, WebRequest request) {
-        log.error("Authentication Exception: {}", ex.getMessage());
+        log.error("Excepción de error de autenticación: {}", ex.getMessage());
 
         ErrorResponseDTO errorResponse = ErrorResponseDTO.builder()
                 .timestamp(LocalDateTime.now())
@@ -158,7 +158,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponseDTO> handleGlobalException(
             Exception ex, WebRequest request) {
-        log.error("Unexpected Exception", ex);
+        log.error("Excepción error del servidor", ex);
 
         ErrorResponseDTO errorResponse = ErrorResponseDTO.builder()
                 .timestamp(LocalDateTime.now())

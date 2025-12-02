@@ -19,14 +19,14 @@
 
       @PostMapping("/login")
       public ResponseEntity<AuthResponseDTO> login(@Valid @RequestBody AuthRequest request) {
-          log.info("Authenticating user with email: {}", request.getEmail());
+          log.info("Usuario autenticado con el correo: {}", request.getEmail());
           AuthResponseDTO response = authService.login(request);
           return ResponseEntity.ok(response);
       }
 
       @PostMapping("/logout")
       public ResponseEntity<String> logout() {
-          log.info("User logged out");
-          return ResponseEntity.ok("Logged out successfully");
+          log.info("Sesión finalizada");
+          return ResponseEntity.ok("Sesión finalizada con succeso");
       }
   }
