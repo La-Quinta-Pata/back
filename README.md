@@ -94,9 +94,9 @@ mvn test
 
 | Role | Name | GitHub | LinkedIn |
 |------|------|--------|----------|
-| 🧠 Product Owner & Developer | **Suraya Matter** | [GitHub](https://github.com/surayac) | [LinkedIn](https://www.linkedin.com/in/suraya-mattar/) |
+| 🧠 Product Owner & Developer | **Suraya Mattar** | [GitHub](https://github.com/surayac) | [LinkedIn](https://www.linkedin.com/in/suraya-mattar/) |
 | 🧩 Scrum Master & Developer | **Daniella Pacheco** | [GitHub](https://github.com/DaniPacheco8) | [LinkedIn](https://www.linkedin.com/in/daniellapacheco/) |
-| 💻 Developer | **Anna Aguilera** | [GitHub](https://github.com/AnaAguileraMorales88) | [LinkedIn](https://www.linkedin.com/in/ana-aguilera-morales-011b1a238/) |
+| 💻 Developer | **Ana Aguilera** | [GitHub](https://github.com/AnaAguileraMorales88) | [LinkedIn](https://www.linkedin.com/in/ana-aguilera-morales-011b1a238/) |
 | 💻 Developer | **Montserrat Muñoz** | [GitHub](https://github.com/Montc027) | [LinkedIn](https://www.linkedin.com/in/montse-mu%C3%B1oz-ba202b227/) |
 | 💻 Developer | **Estefanía Secanell** | [GitHub](https://github.com/Abaraira) | [LinkedIn]() |
 | 💻 Developer | **Mio Ogura** | [GitHub](https://github.com/miaryl) | [LinkedIn](https://www.linkedin.com/in/mio-ogura/) |
