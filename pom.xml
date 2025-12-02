@@ -9,7 +9,7 @@
 		<version>3.5.8</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.laquintapata</groupId>
+	<groupId>com.laquintapata</groupId> 
 	<artifactId>app</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>app</name>

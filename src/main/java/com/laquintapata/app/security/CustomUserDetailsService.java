@@ -20,11 +20,11 @@ package com.laquintapata.app.security;
       public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
           User user = userRepository.findByEmail(email)
                   .orElseThrow(() -> {
-                      log.error("User not found with email: {}", email);
+                      log.error("Usuario no encontrado con email {}", email);
                       return new UsernameNotFoundException("Usuario no encontrado con email: " + email);
                   });
 
-          log.debug("User loaded successfully: {}", email);
+          log.debug("User cargado con éxito: {}", email);
           return new UserDetail(user);
       }
   }

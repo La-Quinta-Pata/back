@@ -29,8 +29,8 @@ public class JwtTokenProvider {
                     .withExpiresAt(new Date(System.currentTimeMillis() + jwtProperties.getExpirationMs()))
                     .sign(algorithm);
         } catch (Exception e) {
-            log.error("Error generating JWT token", e);
-            throw new RuntimeException("Error generating JWT token", e);
+            log.error("Error generando token JWT", e);
+            throw new RuntimeException("Error generando token JWT", e);
         }
     }
 
@@ -45,7 +45,7 @@ public class JwtTokenProvider {
 
             return UUID.fromString(userId);
         } catch (JWTVerificationException e) {
-            log.error("Error extracting userId from token", e);
+            log.error("Error al extraer userId del token", e);
             return null;
         }
     }
@@ -60,7 +60,7 @@ public class JwtTokenProvider {
                     .getClaim("email")
                     .asString();
         } catch (JWTVerificationException e) {
-            log.error("Error extracting email from token", e);
+            log.error("Error al extraer email del token", e);
             return null;
         }
     }
@@ -75,7 +75,7 @@ public class JwtTokenProvider {
 
             return true;
         } catch (JWTVerificationException e) {
-            log.error("Invalid JWT token: {}", e.getMessage());
+            log.error("Token JWT inválido: {}", e.getMessage());
             return false;
         }
     }

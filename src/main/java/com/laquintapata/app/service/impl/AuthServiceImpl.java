@@ -31,7 +31,7 @@ package com.laquintapata.app.service.impl;
 
       @Override
       public AuthResponseDTO login(AuthRequest request) {
-          log.info("Authenticating user with email: {}", request.getEmail());
+          log.info("Usuario autenticado con email: {}", request.getEmail());
 
           Authentication authentication = authenticationManager.authenticate(
                   new UsernamePasswordAuthenticationToken(
@@ -41,11 +41,11 @@ package com.laquintapata.app.service.impl;
           SecurityContextHolder.getContext().setAuthentication(authentication);
 
           User user = userRepository.findByEmail(request.getEmail())
-                  .orElseThrow(() -> new RuntimeException("User not found"));
+                  .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
 
           String token = jwtTokenProvider.generateToken(user.getId(), user.getEmail());
 
-          log.info("User authenticated successfully: {}", request.getEmail());
+          log.info("Usuario autenticado con éxito: {}", request.getEmail());
 
           UserResponse userResponse = userMapper.userToUserResponse(user);
 

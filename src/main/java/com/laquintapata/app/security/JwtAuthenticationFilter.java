@@ -46,17 +46,17 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
                 SecurityContextHolder.getContext().setAuthentication(authentication);
 
-                log.debug("Set Spring Security authentication for user: {}", email);
+                log.debug("Definiendo autenticación de Spring Security para usuario: {}", email);
             }
         } catch (Exception e) {
-            log.error("Error processing JWT authentication", e);
+            log.error("Error al procesar autenticación JWT", e);
         }
 
         filterChain.doFilter(request, response);
     }
 
     private String extractTokenFromRequest(HttpServletRequest request) {
-        String bearerToken = request.getHeader("Authorization");
+        String bearerToken = request.getHeader("Autorización");
 
         if (bearerToken != null && bearerToken.startsWith("Bearer ")) {
             return bearerToken.substring(7);
