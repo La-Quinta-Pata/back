@@ -11,11 +11,8 @@ package com.laquintapata.app.dto.response;
   @Builder
   public class AuthResponseDTO {
 
-      private String token;
-
-      private String tokenType;
-
-      private Long expiresIn;
-
       private UserResponse user;
+
+      @com.fasterxml.jackson.annotation.JsonIgnore
+      private String token;
   }

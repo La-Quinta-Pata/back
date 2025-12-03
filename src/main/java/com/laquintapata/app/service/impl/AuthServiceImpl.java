@@ -50,10 +50,8 @@ package com.laquintapata.app.service.impl;
           UserResponse userResponse = userMapper.userToUserResponse(user);
 
           return AuthResponseDTO.builder()
-                  .token(token)
-                  .tokenType("Bearer")
-                  .expiresIn(86400000L)
                   .user(userResponse)
+                  .token(token)
                   .build();
       }
   }
