@@ -52,7 +52,7 @@ class UserControllerTest {
                 .role("ADMIN")
                 .build();
 
-        when(userService.createAdmin(any(UserRequest.class))).thenReturn(resp);
+        when(userService.createUser(any(UserRequest.class))).thenReturn(resp);
 
         mockMvc.perform(post("/api/users")
                         .contentType(MediaType.APPLICATION_JSON)
