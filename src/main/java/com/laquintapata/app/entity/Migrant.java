@@ -17,12 +17,9 @@ public class Migrant {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @Column(nullable = false, length = 100)
+    @Column(nullable = false)
     private String name;
 
-    @Column(name = "last_name", nullable = false, length = 100)
+    @Column(name = "last_name", nullable = false)
     private String lastName;
-
-    @Column(name = "origin_id", nullable = false)
-    private Integer originId;
 }
