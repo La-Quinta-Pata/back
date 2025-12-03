@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     private final PasswordEncoder passwordEncoder;
     private final UserMapper userMapper;
 
-@Override
+    @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         User user = userRepository.findByEmail(email)
             .orElseThrow(() ->
@@ -39,23 +39,29 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         return new UserDetail(user);
     }
 
-
-@Override
-    public UserResponse createAdmin(UserRequest userRequest) {
+    @Override
+    public UserResponse createUser(UserRequest userRequest) {
         
         if (userRepository.findByEmail(userRequest.getEmail()).isPresent()) {
             throw new DuplicateResourceException(
                 "El email '" + userRequest.getEmail() + "' ya está registrado."
             );
         }
+        
         String hashedPassword = passwordEncoder.encode(userRequest.getPassword());
-        User user = userMapper.userRequestToUser(userRequest, hashedPassword, "ADMIN");
+        
+        String role = (userRequest.getRole() != null && !userRequest.getRole().isEmpty()) 
+                      ? userRequest.getRole() 
+                      : "USER";
+        
+        User user = userMapper.userRequestToUser(userRequest, hashedPassword, role);
     
         User savedUser = userRepository.save(user);
+        
         return userMapper.userToUserResponse(savedUser);
     }
 
-@Override
+    @Override
     public UserResponse getUserById(UUID id) {
         User user = userRepository.findById(id).orElseThrow(() ->
             new ResourceNotFoundException("Usuario", "ID", id) 
@@ -70,10 +76,52 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         );
         return userMapper.userToUserResponse(user);
     }
+
     @Override
     public List<UserResponse> getUsers() {
         return userRepository.findAll().stream()
             .map(userMapper::userToUserResponse)
             .collect(Collectors.toList());
+    }
+
+    @Override
+    public UserResponse updateUser(UUID id, UserRequest userRequest) {
+        
+        User existingUser = userRepository.findById(id)
+            .orElseThrow(() -> new ResourceNotFoundException("Usuario", "ID", id));
+        
+        if (!existingUser.getEmail().equals(userRequest.getEmail())) {
+            if (userRepository.findByEmail(userRequest.getEmail()).isPresent()) {
+                throw new DuplicateResourceException(
+                    "El email '" + userRequest.getEmail() + "' ya está registrado por otro usuario."
+                );
+            }
+        }
+        
+        existingUser.setName(userRequest.getName());
+        existingUser.setEmail(userRequest.getEmail());
+        
+        if (userRequest.getPassword() != null && !userRequest.getPassword().isEmpty()) {
+            String hashedPassword = passwordEncoder.encode(userRequest.getPassword());
+            existingUser.setPassword(hashedPassword);
+        }
+        
+        if (userRequest.getRole() != null && !userRequest.getRole().isEmpty()) {
+            existingUser.setRole(userRequest.getRole());
+        }
+        
+        User updatedUser = userRepository.save(existingUser);
+        
+        return userMapper.userToUserResponse(updatedUser);
+    }
+
+    @Override
+    public void deleteUser(UUID id) {
+        
+        User user = userRepository.findById(id)
+            .orElseThrow(() -> new ResourceNotFoundException("Usuario", "ID", id));
+        
+        userRepository.delete(user);
+        
     }
 }
