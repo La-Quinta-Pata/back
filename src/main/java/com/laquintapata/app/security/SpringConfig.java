@@ -21,7 +21,7 @@ import org.springframework.http.HttpMethod;
 
 import java.util.Arrays;
 
-@Configuration
+@Configuration(proxyBeanMethods = false)
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class SpringConfig {
@@ -84,6 +84,7 @@ public class SpringConfig {
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE",
                 "PATCH", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList("*"));
+        configuration.setExposedHeaders(Arrays.asList("Authorization", "X-Auth-Token", "Content-Type"));
         configuration.setAllowCredentials(true);
         configuration.setMaxAge(3600L);
 

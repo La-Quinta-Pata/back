@@ -25,6 +25,7 @@
 
           HttpHeaders headers = new HttpHeaders();
           headers.set(HttpHeaders.AUTHORIZATION, "Bearer " + response.getToken());
+          headers.set("X-Auth-Token", response.getToken());
 
           return ResponseEntity.ok().headers(headers).body(response);
       }
