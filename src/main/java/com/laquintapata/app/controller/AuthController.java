@@ -23,10 +23,4 @@
           AuthResponseDTO response = authService.login(request);
           return ResponseEntity.ok(response);
       }
-
-      @PostMapping("/logout")
-      public ResponseEntity<String> logout() {
-          log.info("Sesión finalizada");
-          return ResponseEntity.ok("Sesión finalizada con succeso");
-      }
   }

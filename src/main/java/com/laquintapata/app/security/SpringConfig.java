@@ -63,7 +63,6 @@ public class SpringConfig {
                 .authorizeHttpRequests(authz -> authz
                         .requestMatchers("/api/auth/register").permitAll()
                         .requestMatchers("/api/auth/login").permitAll()
-                        .requestMatchers("/api/auth/logout").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/videos").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/videos/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/team-members").permitAll()
