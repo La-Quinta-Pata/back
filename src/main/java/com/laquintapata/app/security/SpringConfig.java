@@ -61,13 +61,9 @@ public class SpringConfig {
                             response.getWriter().write("{\"error\": \"Access Denied\"}");
                         }))
                 .authorizeHttpRequests(authz -> authz
-                        .requestMatchers("/api/auth/register").permitAll()
                         .requestMatchers("/api/auth/login").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/videos").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/videos/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/team-members").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/collaborators").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/project-info").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/videos/**").permitAll()                    
                         .anyRequest().authenticated())
                 .addFilterBefore(jwtAuthenticationFilter,
                         UsernamePasswordAuthenticationFilter.class);
