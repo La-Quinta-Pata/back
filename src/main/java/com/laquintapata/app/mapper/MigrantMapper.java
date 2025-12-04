@@ -13,4 +13,8 @@ public interface MigrantMapper {
 
     MigrantResponse migrantToMigrantResponse(Migrant migrant);
 
+    @Mapping(target = "id", ignore = true)
+    Migrant migrantRequestToMigrant(MigrantRequest request);
+
+
 }
