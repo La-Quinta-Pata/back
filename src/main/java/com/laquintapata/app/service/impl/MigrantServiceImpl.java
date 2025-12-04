@@ -81,7 +81,7 @@ public class MigrantServiceImpl implements MigrantService {
         
         existingMigrant.setName(request.getName());
         existingMigrant.setLastName(request.getLastName());
-        existingMigrant.setOriginId(request.getOriginId());
+       // existingMigrant.setOriginId(request.getOriginId());
         
         Migrant updatedMigrant = migrantRepository.save(existingMigrant);
         

@@ -46,6 +46,14 @@ public class Video {
     @JoinColumn(name = "axis_id", nullable = false)
     private Axis axis;
 
+    @ManyToOne
+    @JoinColumn(name = "migrant_id", nullable = false)
+    private Migrant migrant;
+    
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
     @ManyToMany
     @JoinTable(name = "video_themes", joinColumns = @JoinColumn(name = "video_id"), inverseJoinColumns = @JoinColumn(name = "theme_id"))
     private List<Theme> themes;

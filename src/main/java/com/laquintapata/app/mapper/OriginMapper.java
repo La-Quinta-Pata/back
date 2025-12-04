@@ -14,5 +14,6 @@ public interface OriginMapper {
     OriginResponse originToOriginResponse(Origin origin);
 
     @Mapping(target = "id", ignore = true)
+    @Mapping(target = "migrant", ignore = true)
     Origin originRequestToOrigin(OriginRequest request);
 }

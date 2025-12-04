@@ -2,6 +2,8 @@ package com.laquintapata.app.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -28,4 +30,7 @@ public class User {
     @Column(nullable = false, length = 10)
     @ToString.Exclude
     private String password;
+
+    @OneToMany(mappedBy = "user")
+    private List<Video> video;
 }

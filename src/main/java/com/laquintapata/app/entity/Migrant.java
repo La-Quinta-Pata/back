@@ -1,5 +1,6 @@
 package com.laquintapata.app.entity;
 
+import java.util.List;
 import java.util.UUID;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -23,6 +24,11 @@ public class Migrant {
     @Column(name = "last_name", nullable = false, length = 50)
     private String lastName;
 
-    @Column(name = "origin_id", nullable = false)
-    private Integer originId;
+    @OneToMany(mappedBy = "migrant")
+    private List<Video> videos;
+
+    @ManyToOne
+    @JoinColumn(name = "origin_id", nullable = false)
+    private Origin origin;
+
 }

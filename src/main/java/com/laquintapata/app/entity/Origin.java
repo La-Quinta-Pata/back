@@ -1,5 +1,7 @@
 package com.laquintapata.app.entity;
 
+import java.util.List;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,4 +20,7 @@ public class Origin {
 
     @Column(nullable = false, unique = true, length = 50)
     private String country;
+
+    @OneToMany(mappedBy = "origin")
+    private List<Migrant> migrant;
 }
