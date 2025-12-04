@@ -15,6 +15,7 @@ public interface VideoMapper {
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "axis", ignore = true)
+    @Mapping(target = "themes", ignore = true)
     Video toEntity(VideoRequestDTO dto);
 
     @Mapping(source = "axis.id", target = "axisId")
@@ -24,5 +25,6 @@ public interface VideoMapper {
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "axis", ignore = true)
+    @Mapping(target = "themes", ignore = true)
     void updateEntityFromRequest(VideoRequestDTO dto, @MappingTarget Video video);
 }

@@ -13,12 +13,14 @@ import com.laquintapata.app.entity.Theme;
 @Mapper(componentModel = "spring")
 public interface ThemeMapper {
 
-    @Mapping(target="id", ignore = true)
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "videos", ignore = true)
     Theme toEntity(ThemeRequestDTO dto);
 
     ThemeResponseDTO toResponseDTO(Theme theme);
-    
+
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    @Mapping(target="id", ignore = true)
-    void updateEntityFromRequest(ThemeRequestDTO dto, @MappingTarget Theme theme);    
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "videos", ignore = true)
+    void updateEntityFromRequest(ThemeRequestDTO dto, @MappingTarget Theme theme);
 }
