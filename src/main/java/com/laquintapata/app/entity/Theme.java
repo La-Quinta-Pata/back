@@ -1,10 +1,13 @@
 package com.laquintapata.app.entity;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -34,5 +37,8 @@ public class Theme {
     @Size(max = 500, message = "La describición no puede tener más de 500 caracteres")
     @Column(length = 500)
     private String description;
+
+    @ManyToMany(mappedBy = "themes")
+    private List<Video> videos;
 
 }
