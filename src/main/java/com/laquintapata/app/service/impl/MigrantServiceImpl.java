@@ -9,6 +9,7 @@ import com.laquintapata.app.mapper.MigrantMapper;
 import com.laquintapata.app.repository.MigrantRepository;
 import com.laquintapata.app.service.interfaces.MigrantService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,7 +24,7 @@ public class MigrantServiceImpl implements MigrantService {
     private final MigrantMapper migrantMapper;
 
     @Override
-    public MigrantResponse createMigrant(MigrantRequest request) {
+    public MigrantResponse createMigrant(@NonNull MigrantRequest request) {
         
         if (migrantRepository.existsByNameAndLastName(request.getName(), request.getLastName())) {
             throw new DuplicateResourceException(
@@ -33,14 +34,13 @@ public class MigrantServiceImpl implements MigrantService {
         }
         
         Migrant migrant = migrantMapper.migrantRequestToMigrant(request);
-        
         Migrant savedMigrant = migrantRepository.save(migrant);
         
         return migrantMapper.migrantToMigrantResponse(savedMigrant);
     }
 
     @Override
-    public MigrantResponse getMigrantById(UUID id) {
+    public MigrantResponse getMigrantById(@NonNull UUID id) {
         Migrant migrant = migrantRepository.findById(id)
             .orElseThrow(() -> new ResourceNotFoundException("Migrante", "ID", id));
         
@@ -63,7 +63,7 @@ public class MigrantServiceImpl implements MigrantService {
     }
 
     @Override
-    public MigrantResponse updateMigrant(UUID id, MigrantRequest request) {
+    public MigrantResponse updateMigrant(@NonNull UUID id, @NonNull MigrantRequest request) {
         
         Migrant existingMigrant = migrantRepository.findById(id)
             .orElseThrow(() -> new ResourceNotFoundException("Migrante", "ID", id));
@@ -83,14 +83,13 @@ public class MigrantServiceImpl implements MigrantService {
         existingMigrant.setLastName(request.getLastName());
         existingMigrant.setOriginId(request.getOriginId());
         
-   
         Migrant updatedMigrant = migrantRepository.save(existingMigrant);
         
         return migrantMapper.migrantToMigrantResponse(updatedMigrant);
     }
 
     @Override
-    public void deleteMigrant(UUID id) {
+    public void deleteMigrant(@NonNull UUID id) {
         
         Migrant migrant = migrantRepository.findById(id)
             .orElseThrow(() -> new ResourceNotFoundException("Migrante", "ID", id));

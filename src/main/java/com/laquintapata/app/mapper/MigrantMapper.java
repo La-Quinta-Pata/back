@@ -15,6 +15,4 @@ public interface MigrantMapper {
 
     @Mapping(target = "id", ignore = true)
     Migrant migrantRequestToMigrant(MigrantRequest request);
-
-
 }
