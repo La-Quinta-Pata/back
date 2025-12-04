@@ -5,16 +5,12 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.UUID;
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class MigrantResponse {
+public class OriginResponse {
 
-    private UUID id;
-    private String name;
-    private String lastName;
-    private Integer originId;
+    private Integer id;
+    private String country;
 }

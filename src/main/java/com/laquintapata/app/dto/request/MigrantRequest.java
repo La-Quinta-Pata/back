@@ -1,6 +1,7 @@
 package com.laquintapata.app.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,4 +19,7 @@ public class MigrantRequest {
     @NotBlank(message = "El apellido es obligatorio")
     @Size(max = 100, message = "El apellido no puede tener más de 100 caracteres")
     private String lastName;
+
+    @NotNull(message = "El ID de origen es obligatorio")
+    private Integer originId;
 }
