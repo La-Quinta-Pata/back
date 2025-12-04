@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @RestController
-@RequestMapping("/api/v1/videos")
+@RequestMapping("/api/videos")
 @RequiredArgsConstructor
 
 public class VideoController {
