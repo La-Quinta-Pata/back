@@ -1,9 +1,9 @@
- package com.laquintapata.app.service.interfaces;
+package com.laquintapata.app.service.interfaces;
 
-  import com.laquintapata.app.dto.request.AuthRequest;
-  import com.laquintapata.app.dto.response.AuthResponseDTO;
+import com.laquintapata.app.dto.request.AuthRequest;
+import com.laquintapata.app.dto.response.AuthResponseDTO;
 
-  public interface AuthService {
+public interface AuthService {
 
-      AuthResponseDTO login(AuthRequest request);
-  }
+    AuthResponseDTO login(AuthRequest request);
+}
