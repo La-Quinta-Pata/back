@@ -13,11 +13,11 @@ import lombok.NoArgsConstructor;
 public class MigrantRequest {
 
     @NotBlank(message = "El nombre es obligatorio")
-    @Size(max = 100, message = "El nombre no puede tener más de 100 caracteres")
+    @Size(max = 50, message = "El nombre no puede tener más de 50 caracteres")
     private String name;
 
     @NotBlank(message = "El apellido es obligatorio")
-    @Size(max = 100, message = "El apellido no puede tener más de 100 caracteres")
+    @Size(max = 50, message = "El apellido no puede tener más de 50 caracteres")
     private String lastName;
 
     @NotNull(message = "El ID de origen es obligatorio")

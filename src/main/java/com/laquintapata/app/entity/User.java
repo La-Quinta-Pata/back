@@ -5,27 +5,27 @@ import lombok.*;
 import java.util.UUID;
 
 @Entity
-@Table(name = "users")  
+@Table(name = "users")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 public class User {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-    
-    @Column(nullable = false, unique = true)
+
+    @Column(nullable = false, unique = true, length = 100)
     private String email;
 
-    @Column()
+    @Column(nullable = false, length = 50)
     private String name;
 
     @Column(nullable = false)
     private String role;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 10)
     @ToString.Exclude
     private String password;
 }

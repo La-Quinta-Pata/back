@@ -1,15 +1,18 @@
 package com.laquintapata.app.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 @Data
 public class VideoRequestDTO {
 
     @NotBlank(message = "El título no puede estar vacío.")
+    @Size(max = 100, message = "El titulo no debe tener más de 100 carácteres")
     private String title;
 
     @NotBlank(message = "La descripción no puede estar vacía.")
+    @Size(max = 500, message = "La descripción no debe tener más de 500 carácteres")
     private String description;
 
     @NotBlank(message = "La URL del video es obligatoria.")

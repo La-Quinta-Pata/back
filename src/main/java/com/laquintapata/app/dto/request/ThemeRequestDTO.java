@@ -1,11 +1,13 @@
 package com.laquintapata.app.dto.request;
 
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 @Data
 public class ThemeRequestDTO {
 
+    @NotBlank(message = "El tema es obligatório")
     @Size(min = 2, max = 150, message = "El tema debe tener entre 2 y 150 caracteres")
     private String name;
 
