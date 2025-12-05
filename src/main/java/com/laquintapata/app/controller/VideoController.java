@@ -11,6 +11,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -66,4 +67,9 @@ public class VideoController {
         return ResponseEntity.noContent().build();
     }
 
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<List<VideoResponseDTO>> getByUser(@PathVariable UUID userId) {
+        List<VideoResponseDTO> videos = videoService.getByUser(userId);
+        return ResponseEntity.ok(videos);
+    }
 }

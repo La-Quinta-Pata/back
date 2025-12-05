@@ -27,6 +27,7 @@ public interface VideoMapper {
 
     @Mapping(source = "axis.id", target = "axisId")
     @Mapping(source = "axis.type", target = "axisType")
+    @Mapping(source = "user.id", target = "userId")
     VideoResponseDTO toResponseDTO(Video video);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)

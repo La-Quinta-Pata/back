@@ -1,6 +1,7 @@
 package com.laquintapata.app.service.impl;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import org.springframework.security.core.Authentication;
@@ -108,4 +109,11 @@ public class VideoServiceImpl implements VideoService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public List<VideoResponseDTO> getByUser(UUID userId) {
+        return videoRepository.findByUserId(userId)
+                .stream()
+                .map(videoMapper::toResponseDTO)
+                .toList();
+    }
 }
