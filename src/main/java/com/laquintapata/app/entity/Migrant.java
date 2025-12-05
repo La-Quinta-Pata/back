@@ -21,7 +21,7 @@ public class Migrant {
     @Column(nullable = false, length = 50)
     private String name;
 
-    @Column(name = "last_name", nullable = false, length = 50)
+    @Column(name = "last_name", length = 50)
     private String lastName;
 
     @OneToMany(mappedBy = "migrant")

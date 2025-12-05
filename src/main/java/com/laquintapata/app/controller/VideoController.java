@@ -3,6 +3,7 @@ package com.laquintapata.app.controller;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.laquintapata.app.dto.request.VideoRequestDTO;
+import com.laquintapata.app.dto.response.CatalogResponseDTO;
 import com.laquintapata.app.dto.response.VideoResponseDTO;
 import com.laquintapata.app.service.interfaces.VideoService;
 
@@ -32,6 +33,11 @@ public class VideoController {
     public ResponseEntity<List<VideoResponseDTO>> getAll() {
         List<VideoResponseDTO> response = videoService.getAll();
         return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/catalog")
+    public ResponseEntity<List<CatalogResponseDTO>> getCatalog() {
+        return ResponseEntity.ok(videoService.getCatalog());
     }
 
     @GetMapping("/{id}")

@@ -3,10 +3,12 @@ package com.laquintapata.app.service.impl;
 import com.laquintapata.app.dto.request.MigrantRequest;
 import com.laquintapata.app.dto.response.MigrantResponse;
 import com.laquintapata.app.entity.Migrant;
+import com.laquintapata.app.entity.Origin;
 import com.laquintapata.app.exception.DuplicateResourceException;
 import com.laquintapata.app.exception.ResourceNotFoundException;
 import com.laquintapata.app.mapper.MigrantMapper;
 import com.laquintapata.app.repository.MigrantRepository;
+import com.laquintapata.app.repository.OriginRepository;
 import com.laquintapata.app.service.interfaces.MigrantService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.lang.NonNull;
@@ -22,78 +24,83 @@ public class MigrantServiceImpl implements MigrantService {
 
     private final MigrantRepository migrantRepository;
     private final MigrantMapper migrantMapper;
+    private final OriginRepository originRepository;
 
     @Override
     public MigrantResponse createMigrant(@NonNull MigrantRequest request) {
-        
+
         if (migrantRepository.existsByNameAndLastName(request.getName(), request.getLastName())) {
             throw new DuplicateResourceException(
-                "Ya existe un migrante con el nombre '" + request.getName() + 
-                "' y apellido '" + request.getLastName() + "'"
-            );
+                    "Ya existe un migrante con el nombre '" + request.getName() +
+                            "' y apellido '" + request.getLastName() + "'");
         }
-        
+
         Migrant migrant = migrantMapper.migrantRequestToMigrant(request);
+        Origin origin = originRepository.findById(request.getOriginId())
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        "No se encontró Origin con id " + request.getOriginId()));
+
+        migrant.setOrigin(origin);
+
         Migrant savedMigrant = migrantRepository.save(migrant);
-        
+
         return migrantMapper.migrantToMigrantResponse(savedMigrant);
     }
 
     @Override
     public MigrantResponse getMigrantById(@NonNull UUID id) {
         Migrant migrant = migrantRepository.findById(id)
-            .orElseThrow(() -> new ResourceNotFoundException("Migrante", "ID", id));
-        
+                .orElseThrow(() -> new ResourceNotFoundException("Migrante", "ID", id));
+
         return migrantMapper.migrantToMigrantResponse(migrant);
     }
 
     @Override
     public MigrantResponse getMigrantByName(String name) {
         Migrant migrant = migrantRepository.findByName(name)
-            .orElseThrow(() -> new ResourceNotFoundException("Migrante", "nombre", name));
-        
+                .orElseThrow(() -> new ResourceNotFoundException("Migrante", "nombre", name));
+
         return migrantMapper.migrantToMigrantResponse(migrant);
     }
 
     @Override
     public List<MigrantResponse> getAllMigrants() {
         return migrantRepository.findAll().stream()
-            .map(migrantMapper::migrantToMigrantResponse)
-            .collect(Collectors.toList());
+                .map(migrantMapper::migrantToMigrantResponse)
+                .collect(Collectors.toList());
     }
 
     @Override
     public MigrantResponse updateMigrant(@NonNull UUID id, @NonNull MigrantRequest request) {
-        
+
         Migrant existingMigrant = migrantRepository.findById(id)
-            .orElseThrow(() -> new ResourceNotFoundException("Migrante", "ID", id));
-        
-        if (!existingMigrant.getName().equals(request.getName()) || 
-            !existingMigrant.getLastName().equals(request.getLastName())) {
-            
+                .orElseThrow(() -> new ResourceNotFoundException("Migrante", "ID", id));
+
+        if (!existingMigrant.getName().equals(request.getName()) ||
+                !existingMigrant.getLastName().equals(request.getLastName())) {
+
             if (migrantRepository.existsByNameAndLastName(request.getName(), request.getLastName())) {
                 throw new DuplicateResourceException(
-                    "Ya existe otro migrante con el nombre '" + request.getName() + 
-                    "' y apellido '" + request.getLastName() + "'"
-                );
+                        "Ya existe otro migrante con el nombre '" + request.getName() +
+                                "' y apellido '" + request.getLastName() + "'");
             }
         }
-        
+
         existingMigrant.setName(request.getName());
         existingMigrant.setLastName(request.getLastName());
-       // existingMigrant.setOriginId(request.getOriginId());
-        
+        // existingMigrant.setOriginId(request.getOriginId());
+
         Migrant updatedMigrant = migrantRepository.save(existingMigrant);
-        
+
         return migrantMapper.migrantToMigrantResponse(updatedMigrant);
     }
 
     @Override
     public void deleteMigrant(@NonNull UUID id) {
-        
+
         Migrant migrant = migrantRepository.findById(id)
-            .orElseThrow(() -> new ResourceNotFoundException("Migrante", "ID", id));
-        
+                .orElseThrow(() -> new ResourceNotFoundException("Migrante", "ID", id));
+
         migrantRepository.delete(migrant);
     }
 }
