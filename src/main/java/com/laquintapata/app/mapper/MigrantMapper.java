@@ -10,9 +10,11 @@ import org.mapstruct.Mapping;
 public interface MigrantMapper {
 
     MigrantMapper INSTANCE = org.mapstruct.factory.Mappers.getMapper(MigrantMapper.class);
-
+    @Mapping(target = "originId", ignore = true)
     MigrantResponse migrantToMigrantResponse(Migrant migrant);
 
     @Mapping(target = "id", ignore = true)
+    @Mapping(target = "videos", ignore = true)
+    @Mapping(target = "origin", ignore = true)
     Migrant migrantRequestToMigrant(MigrantRequest request);
 }

@@ -17,5 +17,6 @@ public interface UserMapper {
     @Mapping(target = "role", source = "role")
     @Mapping(target = "email", source = "request.email")
     @Mapping(target = "name", source = "request.name")
+    @Mapping(target = "video", ignore = true)
     User userRequestToUser(UserRequest request, String hashedPassword, String role);
 }
