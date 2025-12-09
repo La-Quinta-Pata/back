@@ -27,7 +27,7 @@ public class User {
     @Column(nullable = false)
     private String role;
 
-    @Column(nullable = false, length = 10)
+    @Column(nullable = false, length = 60)
     @ToString.Exclude
     private String password;
 

@@ -5,7 +5,6 @@ import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 
 import java.util.*;
-import java.util.UUID;
 
 import com.laquintapata.app.dto.request.UserRequest;
 import com.laquintapata.app.dto.response.UserResponse;
@@ -50,6 +49,7 @@ class UserServiceImplTest {
         request.setName("Test User");
         request.setEmail("test@example.com");
         request.setPassword("password123");
+        request.setRole("ADMIN");
 
         user = User.builder()
                 .id(UUID.randomUUID())
