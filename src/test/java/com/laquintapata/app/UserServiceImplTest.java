@@ -5,7 +5,6 @@ import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 
 import java.util.*;
-import java.util.UUID;
 
 import com.laquintapata.app.dto.request.UserRequest;
 import com.laquintapata.app.dto.response.UserResponse;
@@ -50,6 +49,7 @@ class UserServiceImplTest {
         request.setName("Test User");
         request.setEmail("test@example.com");
         request.setPassword("password123");
+        request.setRole("ADMIN");
 
         user = User.builder()
                 .id(UUID.randomUUID())
@@ -75,7 +75,7 @@ class UserServiceImplTest {
         when(userRepository.save(user)).thenReturn(user);
         when(userMapper.userToUserResponse(user)).thenReturn(response);
 
-        UserResponse result = userService.createAdmin(request);
+        UserResponse result = userService.createUser(request);
 
         assertThat(result).isNotNull();
         assertThat(result.getEmail()).isEqualTo(request.getEmail());
@@ -88,7 +88,7 @@ class UserServiceImplTest {
     void createAdmin_duplicateEmail_throws() {
         when(userRepository.findByEmail(request.getEmail())).thenReturn(Optional.of(user));
 
-        assertThatThrownBy(() -> userService.createAdmin(request))
+        assertThatThrownBy(() -> userService.createUser(request))
             .isInstanceOf(DuplicateResourceException.class)
             .hasMessageContaining(request.getEmail());
 

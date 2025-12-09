@@ -5,14 +5,16 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.UUID;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class AuthResponseDTO {
+public class MigrantResponse {
 
-  private UserResponse user;
-
-  @com.fasterxml.jackson.annotation.JsonIgnore
-  private String token;
+    private UUID id;
+    private String name;
+    private String lastName;
+    private Integer originId;
 }

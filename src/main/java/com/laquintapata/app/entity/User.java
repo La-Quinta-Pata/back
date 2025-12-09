@@ -2,30 +2,35 @@ package com.laquintapata.app.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
 import java.util.UUID;
 
 @Entity
-@Table(name = "users")  
+@Table(name = "users")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 public class User {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-    
-    @Column(nullable = false, unique = true, length = 100)  
+
+    @Column(nullable = false, unique = true, length = 100)
     private String email;
 
-    @Column(length = 50)  
+    @Column(nullable = false, length = 50)
     private String name;
 
-    @Column(nullable = false, length = 30) 
+    @Column(nullable = false)
     private String role;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 60)
     @ToString.Exclude
     private String password;
+
+    @OneToMany(mappedBy = "user")
+    private List<Video> video;
 }

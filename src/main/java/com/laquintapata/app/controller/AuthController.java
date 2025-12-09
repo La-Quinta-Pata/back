@@ -6,6 +6,7 @@
   import jakarta.validation.Valid;
   import lombok.RequiredArgsConstructor;
   import lombok.extern.slf4j.Slf4j;
+  import org.springframework.http.HttpHeaders;
   import org.springframework.http.ResponseEntity;
   import org.springframework.web.bind.annotation.*;
 
@@ -21,12 +22,11 @@
       public ResponseEntity<AuthResponseDTO> login(@Valid @RequestBody AuthRequest request) {
           log.info("Usuario autenticado con el correo: {}", request.getEmail());
           AuthResponseDTO response = authService.login(request);
-          return ResponseEntity.ok(response);
-      }
 
-      @PostMapping("/logout")
-      public ResponseEntity<String> logout() {
-          log.info("Sesión finalizada");
-          return ResponseEntity.ok("Sesión finalizada con succeso");
+          HttpHeaders headers = new HttpHeaders();
+          headers.set(HttpHeaders.AUTHORIZATION, "Bearer " + response.getToken());
+          headers.set("X-Auth-Token", response.getToken());
+
+          return ResponseEntity.ok().headers(headers).body(response);
       }
   }

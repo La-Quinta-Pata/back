@@ -6,12 +6,9 @@ import com.laquintapata.app.entity.User;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel = "spring")
 public interface UserMapper {
-
-    UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
 
     UserResponse userToUserResponse(User user);
 
@@ -20,5 +17,6 @@ public interface UserMapper {
     @Mapping(target = "role", source = "role")
     @Mapping(target = "email", source = "request.email")
     @Mapping(target = "name", source = "request.name")
+    @Mapping(target = "video", ignore = true)
     User userRequestToUser(UserRequest request, String hashedPassword, String role);
 }

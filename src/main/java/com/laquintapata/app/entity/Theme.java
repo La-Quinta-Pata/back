@@ -7,30 +7,33 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Entity
+@Table(name = "themes")
 @Data
-@Table(name = "axes")
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 
-public class Axis {
-
+public class Theme {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 50)
-    private String type;
+    @Column(nullable = false, unique = true, length = 150)
+    private String name;
 
-    @OneToMany(mappedBy = "axis")
+    @Column(length = 500)
+    private String description;
+
+    @ManyToMany(mappedBy = "themes")
     private List<Video> videos;
 
 }

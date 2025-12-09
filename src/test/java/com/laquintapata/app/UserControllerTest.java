@@ -1,15 +1,17 @@
 package com.laquintapata.app;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.laquintapata.app.controller.UserController;
 import com.laquintapata.app.dto.request.UserRequest;
 import com.laquintapata.app.dto.response.UserResponse;
+import com.laquintapata.app.security.CustomUserDetailsService;
+import com.laquintapata.app.security.JwtTokenProvider;
 import com.laquintapata.app.service.interfaces.UserService;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -24,9 +26,9 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@SpringBootTest
-@AutoConfigureMockMvc(addFilters = false)
 
+@WebMvcTest(UserController.class)
+@AutoConfigureMockMvc(addFilters = false)
 class UserControllerTest {
 
     @Autowired
@@ -38,12 +40,19 @@ class UserControllerTest {
     @MockitoBean
     private UserService userService;
 
+    @MockitoBean
+    private JwtTokenProvider jwtTokenProvider;
+
+     @MockitoBean
+    private CustomUserDetailsService customUserDetailsService;
+
     @Test
     void createAdmin_returnsCreated() throws Exception {
         UserRequest req = new UserRequest();
         req.setName("Test");
         req.setEmail("test@example.com");
-        req.setPassword("password123");
+        req.setPassword("pass123");
+        req.setRole("ADMIN");
 
         UserResponse resp = UserResponse.builder()
                 .id(UUID.randomUUID())
@@ -52,7 +61,7 @@ class UserControllerTest {
                 .role("ADMIN")
                 .build();
 
-        when(userService.createAdmin(any(UserRequest.class))).thenReturn(resp);
+        when(userService.createUser(any(UserRequest.class))).thenReturn(resp);
 
         mockMvc.perform(post("/api/users")
                         .contentType(MediaType.APPLICATION_JSON)

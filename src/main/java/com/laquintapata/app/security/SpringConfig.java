@@ -21,7 +21,7 @@ import org.springframework.http.HttpMethod;
 
 import java.util.Arrays;
 
-@Configuration
+@Configuration(proxyBeanMethods = false)
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class SpringConfig {
@@ -61,14 +61,9 @@ public class SpringConfig {
                             response.getWriter().write("{\"error\": \"Access Denied\"}");
                         }))
                 .authorizeHttpRequests(authz -> authz
-                        .requestMatchers("/api/auth/register").permitAll()
                         .requestMatchers("/api/auth/login").permitAll()
-                        .requestMatchers("/api/auth/logout").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/videos").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/videos/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/team-members").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/collaborators").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/project-info").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/videos/**").permitAll()                    
                         .anyRequest().authenticated())
                 .addFilterBefore(jwtAuthenticationFilter,
                         UsernamePasswordAuthenticationFilter.class);
@@ -85,6 +80,7 @@ public class SpringConfig {
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE",
                 "PATCH", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList("*"));
+        configuration.setExposedHeaders(Arrays.asList("Authorization", "X-Auth-Token", "Content-Type"));
         configuration.setAllowCredentials(true);
         configuration.setMaxAge(3600L);
 

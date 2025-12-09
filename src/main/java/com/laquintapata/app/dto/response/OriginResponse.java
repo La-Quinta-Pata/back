@@ -9,10 +9,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class AuthResponseDTO {
+public class OriginResponse {
 
-  private UserResponse user;
-
-  @com.fasterxml.jackson.annotation.JsonIgnore
-  private String token;
+    private Integer id;
+    private String country;
 }
