@@ -63,7 +63,6 @@ class UserServiceImplTest {
                 .id(user.getId())
                 .name(user.getName())
                 .email(user.getEmail())
-                .role(user.getRole())
                 .build();
     }
 

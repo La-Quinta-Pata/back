@@ -52,13 +52,11 @@ class UserControllerTest {
         req.setName("Test");
         req.setEmail("test@example.com");
         req.setPassword("pass123");
-        req.setRole("ADMIN");
 
         UserResponse resp = UserResponse.builder()
                 .id(UUID.randomUUID())
                 .name("Test")
                 .email("test@example.com")
-                .role("ADMIN")
                 .build();
 
         when(userService.createUser(any(UserRequest.class))).thenReturn(resp);
@@ -67,8 +65,7 @@ class UserControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(req)))
                 .andExpect(status().isCreated())
-                .andExpect(jsonPath("$.email").value("test@example.com"))
-                .andExpect(jsonPath("$.role").value("ADMIN"));
+                .andExpect(jsonPath("$.email").value("test@example.com"));
     }
 
     @Test
@@ -77,7 +74,6 @@ class UserControllerTest {
                 .id(UUID.randomUUID())
                 .name("TestUser")
                 .email("test@example.com")
-                .role("ADMIN")
                 .build();
 
         when(userService.getUsers()).thenReturn(List.of(resp));
@@ -96,7 +92,6 @@ class UserControllerTest {
                 .id(id)
                 .name("Test")
                 .email("test@example.com")
-                .role("ADMIN")
                 .build();
 
         when(userService.getUserById(id)).thenReturn(resp);
@@ -113,7 +108,6 @@ class UserControllerTest {
                 .id(UUID.randomUUID())
                 .name("TestName")
                 .email("test@example.com")
-                .role("ADMIN")
                 .build();
 
         when(userService.getUserByName("TestName")).thenReturn(resp);
