@@ -13,11 +13,13 @@ import com.laquintapata.app.dto.response.CatalogResponseDTO;
 import com.laquintapata.app.dto.response.VideoResponseDTO;
 import com.laquintapata.app.entity.Axis;
 import com.laquintapata.app.entity.Migrant;
+import com.laquintapata.app.entity.Origin;
 import com.laquintapata.app.entity.User;
 import com.laquintapata.app.entity.Video;
 import com.laquintapata.app.mapper.VideoMapper;
 import com.laquintapata.app.repository.AxisRepository;
 import com.laquintapata.app.repository.MigrantRepository;
+import com.laquintapata.app.repository.OriginRepository;
 import com.laquintapata.app.repository.UserRepository;
 import com.laquintapata.app.repository.VideoRepository;
 import com.laquintapata.app.security.UserDetail;
@@ -33,6 +35,7 @@ public class VideoServiceImpl implements VideoService {
     private final VideoMapper videoMapper;
     private final AxisRepository axisRepository;
     private final MigrantRepository migrantRepository;
+    private final OriginRepository originRepository;
     private final UserRepository userRepository;
 
     @Override
@@ -44,8 +47,24 @@ public class VideoServiceImpl implements VideoService {
         User user = userRepository.findByEmail(userDetail.getUsername())
                 .orElseThrow(() -> new RuntimeException("User no encontrado"));
 
-        Migrant migrant = migrantRepository.findById(dto.getMigrantId())
-                .orElseThrow(() -> new RuntimeException("Migrante no encontrado"));
+        // ✅ Buscar o crear Origin
+        Origin origin = originRepository.findByCountry(dto.getOriginCountry())
+                .orElseGet(() -> {
+                    Origin newOrigin = new Origin();
+                    newOrigin.setCountry(dto.getOriginCountry());
+                    return originRepository.save(newOrigin);
+                });
+
+        // ✅ Buscar o crear Migrant
+        Migrant migrant = migrantRepository
+                .findByNameAndLastNameAndOrigin(dto.getMigrantName(), dto.getMigrantLastName(), origin)
+                .orElseGet(() -> {
+                    Migrant newMigrant = new Migrant();
+                    newMigrant.setName(dto.getMigrantName());
+                    newMigrant.setLastName(dto.getMigrantLastName());
+                    newMigrant.setOrigin(origin);
+                    return migrantRepository.save(newMigrant);
+                });
 
         Axis axis = axisRepository.findById(dto.getAxisId())
                 .orElseThrow(() -> new RuntimeException("Axis no encontrado"));

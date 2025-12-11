@@ -12,11 +12,14 @@ import com.laquintapata.app.mapper.AxisMapper;
 import com.laquintapata.app.repository.AxisRepository;
 import com.laquintapata.app.service.interfaces.AxisService;
 
+import lombok.RequiredArgsConstructor;
+
 @Service
+@RequiredArgsConstructor
 public class AxisServiceImpl implements AxisService {
 
-    private AxisRepository axisRepository;
-    private AxisMapper axisMapper;
+    private final AxisRepository axisRepository;
+    private final AxisMapper axisMapper;
 
     @Override
     public AxisResponseDTO create(AxisRequestDTO dto) {

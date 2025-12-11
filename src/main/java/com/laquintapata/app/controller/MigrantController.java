@@ -27,12 +27,11 @@ public class MigrantController {
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
-    @GetMapping
-    @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<List<MigrantResponse>> getAllMigrants() {
-        List<MigrantResponse> migrants = migrantService.getAllMigrants();
-        return new ResponseEntity<>(migrants, HttpStatus.OK);
-    }
+@GetMapping
+public ResponseEntity<List<MigrantResponse>> getAllMigrants() {
+    List<MigrantResponse> migrants = migrantService.getAllMigrants();
+    return new ResponseEntity<>(migrants, HttpStatus.OK);
+}
 
     @GetMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
