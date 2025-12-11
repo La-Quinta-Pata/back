@@ -18,7 +18,6 @@ public class CatalogResponseDTO {
 
     private UUID migrantId;
     private String migrantName;
-    private String migrantLastName;
     private String migrantOrigin;
 
     private List<String> themeNames;

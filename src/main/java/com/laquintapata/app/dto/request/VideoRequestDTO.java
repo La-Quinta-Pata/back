@@ -1,5 +1,7 @@
 package com.laquintapata.app.dto.request;
 
+import java.util.UUID;
+
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -25,15 +27,7 @@ public class VideoRequestDTO {
     @NotNull(message = "El video necesita un eje.")
     private Long axisId;
 
-    @NotBlank(message = "El nombre de la migrante es obligatorio.")
-    @Size(max = 50, message = "El nombre no debe tener más de 50 caracteres")
-    private String migrantName;
+    @NotNull(message = "El migrante es obligatorio.")
+    private UUID migrantId;
 
-    @NotBlank(message = "El apellido de la migrante es obligatorio.")
-    @Size(max = 50, message = "El apellido no debe tener más de 50 caracteres")
-    private String migrantLastName;
-
-    @NotBlank(message = "El país de origen es obligatorio.")
-    @Size(max = 100, message = "El país no debe tener más de 100 caracteres")
-    private String originCountry;
 }

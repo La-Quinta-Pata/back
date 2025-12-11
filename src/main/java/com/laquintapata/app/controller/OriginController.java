@@ -27,7 +27,6 @@ public class OriginController {
     }
 
     @GetMapping
-    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<List<OriginResponse>> getAllOrigins() {
         List<OriginResponse> origins = originService.getAllOrigins();
         return new ResponseEntity<>(origins, HttpStatus.OK);

@@ -11,12 +11,10 @@ import java.util.UUID;
 @Repository
 public interface MigrantRepository extends JpaRepository<Migrant, UUID> {
 
-    Optional<Migrant> findByName(String name);
-    
-    Optional<Migrant> findByLastName(String lastName);
-    
-    boolean existsByNameAndLastName(String name, String lastName);
+    Optional<Migrant> findByName(String name);    
+ 
+    boolean existsByName(String name);
 
-    Optional<Migrant> findByNameAndLastNameAndOrigin(String name, String lastName, Origin origin);
+    Optional<Migrant> findByNameAndOrigin(String name, Origin origin);
 
 }

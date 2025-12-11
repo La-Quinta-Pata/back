@@ -42,7 +42,6 @@ public interface VideoMapper {
     @Mapping(source = "axis.type", target = "axisType")
     @Mapping(source = "migrant.id", target = "migrantId")
     @Mapping(source = "migrant.name", target = "migrantName")
-    @Mapping(source = "migrant.lastName", target = "migrantLastName")
     @Mapping(source = "migrant.origin.country", target = "migrantOrigin")
     @Mapping(source = "themes", target = "themeNames")
     CatalogResponseDTO toCatalogDTO(Video video);

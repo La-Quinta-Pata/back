@@ -16,10 +16,6 @@ public class MigrantRequest {
     @Size(max = 50, message = "El nombre no puede tener más de 50 caracteres")
     private String name;
 
-    @NotBlank(message = "El apellido es obligatorio")
-    @Size(max = 50, message = "El apellido no puede tener más de 50 caracteres")
-    private String lastName;
-
     @NotNull(message = "El ID de origen es obligatorio")
     private Integer originId;
 }

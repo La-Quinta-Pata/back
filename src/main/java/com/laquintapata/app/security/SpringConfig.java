@@ -66,6 +66,7 @@ public class SpringConfig {
                         .requestMatchers(HttpMethod.GET, "/api/videos/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/axes").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/migrants").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/origins").permitAll()
                         .anyRequest().authenticated())
                 .addFilterBefore(jwtAuthenticationFilter,
                         UsernamePasswordAuthenticationFilter.class);

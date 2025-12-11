@@ -10,7 +10,7 @@ import org.mapstruct.Mapping;
 public interface MigrantMapper {
 
     MigrantMapper INSTANCE = org.mapstruct.factory.Mappers.getMapper(MigrantMapper.class);
-    @Mapping(target = "originId", ignore = true)
+    @Mapping(source = "origin.id", target = "originId")
     MigrantResponse migrantToMigrantResponse(Migrant migrant);
 
     @Mapping(target = "id", ignore = true)

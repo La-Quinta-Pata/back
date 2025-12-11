@@ -29,10 +29,9 @@ public class MigrantServiceImpl implements MigrantService {
     @Override
     public MigrantResponse createMigrant(@NonNull MigrantRequest request) {
 
-        if (migrantRepository.existsByNameAndLastName(request.getName(), request.getLastName())) {
+        if (migrantRepository.existsByName(request.getName())) {
             throw new DuplicateResourceException(
-                    "Ya existe un migrante con el nombre '" + request.getName() +
-                            "' y apellido '" + request.getLastName() + "'");
+                    "Ya existe un migrante con el nombre '" + request.getName());
         }
 
         Migrant migrant = migrantMapper.migrantRequestToMigrant(request);
@@ -76,18 +75,15 @@ public class MigrantServiceImpl implements MigrantService {
         Migrant existingMigrant = migrantRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Migrante", "ID", id));
 
-        if (!existingMigrant.getName().equals(request.getName()) ||
-                !existingMigrant.getLastName().equals(request.getLastName())) {
+        if (!existingMigrant.getName().equals(request.getName())) {
 
-            if (migrantRepository.existsByNameAndLastName(request.getName(), request.getLastName())) {
+            if (migrantRepository.existsByName(request.getName())) {
                 throw new DuplicateResourceException(
-                        "Ya existe otro migrante con el nombre '" + request.getName() +
-                                "' y apellido '" + request.getLastName() + "'");
+                        "Ya existe otro migrante con el nombre '" + request.getName());
             }
         }
 
         existingMigrant.setName(request.getName());
-        existingMigrant.setLastName(request.getLastName());
         // existingMigrant.setOriginId(request.getOriginId());
 
         Migrant updatedMigrant = migrantRepository.save(existingMigrant);
