@@ -2,6 +2,8 @@ package com.laquintapata.app.entity;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -31,6 +33,7 @@ public class Axis {
     private String type;
 
     @OneToMany(mappedBy = "axis")
+    @JsonBackReference
     private List<Video> videos;
 
 }

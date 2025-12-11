@@ -68,8 +68,8 @@ public class VideoController {
     }
 
     @GetMapping("/user/{userId}")
-    public ResponseEntity<List<VideoResponseDTO>> getByUser(@PathVariable UUID userId) {
-        List<VideoResponseDTO> videos = videoService.getByUser(userId);
+    public ResponseEntity<List<CatalogResponseDTO>> getByUser(@PathVariable UUID userId) {
+        List<CatalogResponseDTO> videos = videoService.getByUser(userId);
         return ResponseEntity.ok(videos);
     }
 }

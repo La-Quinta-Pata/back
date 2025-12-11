@@ -110,10 +110,10 @@ public class VideoServiceImpl implements VideoService {
     }
 
     @Override
-    public List<VideoResponseDTO> getByUser(UUID userId) {
+    public List<CatalogResponseDTO> getByUser(UUID userId) {
         return videoRepository.findByUserId(userId)
                 .stream()
-                .map(videoMapper::toResponseDTO)
+                .map(videoMapper::toCatalogDTO)
                 .toList();
     }
 }

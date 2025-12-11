@@ -9,14 +9,13 @@ import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 
 import java.time.LocalDateTime;
-import java.util.stream.Collectors;
+import java.util.List;
 
 @ControllerAdvice
 @Slf4j
@@ -98,32 +97,30 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<ErrorResponseDTO> handleMethodArgumentNotValidException(
+    public ResponseEntity<?> handleMethodArgumentNotValidException(
             MethodArgumentNotValidException ex, WebRequest request) {
-        log.error("Excepción de validación fallida");
-
-        String details = ex.getBindingResult()
-                .getAllErrors()
+    
+        List<ErrorItem> errors = ex.getBindingResult()
+                .getFieldErrors()
                 .stream()
-                .map(error -> {
-                    if (error instanceof FieldError) {
-                        FieldError fieldError = (FieldError) error;
-                        return fieldError.getField() + ": " +
-                                fieldError.getDefaultMessage();
-                    }
-                    return error.getDefaultMessage();
-                })
-                .collect(Collectors.joining(", "));
-
+                .map(err -> new ErrorItem(err.getField(), err.getDefaultMessage()))
+                .toList();
+    
         ErrorResponseDTO errorResponse = ErrorResponseDTO.builder()
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.BAD_REQUEST.value())
-                .message("Validación fallida")
-                .details(details)
+                .message("Error de validación")
+                .details("Se encontraron errores de validación")
                 .build();
-
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
+    
+        return ResponseEntity
+                .badRequest()
+                .body(new ValidationPayload(errorResponse, errors));
     }
+    public record ValidationPayload(ErrorResponseDTO error, List<ErrorItem> errors) {}
+    
+    public record ErrorItem(String field, String message) {}
+    
 
     @ExceptionHandler(AccessDeniedException.class)
     public ResponseEntity<ErrorResponseDTO> handleAccessDeniedException(

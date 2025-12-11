@@ -23,6 +23,6 @@ public interface VideoService {
     List<VideoResponseDTO> getAll();
     
     List<CatalogResponseDTO> getCatalog();
-    List<VideoResponseDTO> getByUser(UUID userId);
+    List<CatalogResponseDTO> getByUser(UUID userId);
 
 }
